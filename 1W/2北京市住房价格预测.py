@@ -15,6 +15,8 @@
 
 # ### 数据集读取与划分
 
+import os.sys
+
 # 挑战需要下载北京市部分小区的房价数据集，该数据集的名字为 `challenge-1-beijing.csv`。
 # 点击运行下载数据集
 import numpy as np
@@ -22,16 +24,18 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 
 # 读数据
-get_ipython().system(
+os.sys(
     'wget -nc http://labfile.oss.aliyuncs.com/courses/1081/challenge-1-beijing.csv')
 # 代码开始 ### (≈ 2 行代码)
 df = pd.read_csv('challenge-1-beijing.csv')
+# 填入数字可以预览前n行
 df.head()
 
 
 # 可以看到，该数据集中共包含有 `12` 列。由于线性回归需要输入数值型数据，
 # 所以我们选用的特征包括「公交，写字楼，医院，商场，地铁，学校，建造时间，楼层，面积」
 # 等 `9` 项，而「每平米价格」则是预测目标值。
+# 注意这里选择features的时候需要用两层中括号，把这一堆特征作为一个整体作为df的“一列”
 features = df[['公交', '写字楼', '医院', '商场', '地铁', '学校', '建造时间', '楼层', '面积']]
 target = df['每平米价格']
 
